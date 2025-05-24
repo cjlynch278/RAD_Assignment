@@ -1,0 +1,36 @@
+{
+  "assets": [
+    {
+      "id": "asset_001",
+      "name": "Server A",
+      "type": "server",
+      "ip_address": "192.168.1.10",
+      "os": "Linux",
+      "status": "active"
+    },
+    {
+      "id": "asset_002",
+      "name": "Workstation B",
+      "type": "workstation",
+      "ip_address": "192.168.1.20",
+      "os": "Windows",
+      "status": "inactive"
+    },
+    {
+      "id": "asset_003",
+      "name": "Router C",
+      "type": "network_device",
+      "ip_address": "192.168.1.1",
+      "os": "RouterOS",
+      "status": "active"
+    },
+    {
+      "id": "asset_004",
+      "name": "Database D",
+      "type": "database",
+      "ip_address": "192.168.1.30",
+      "os": "Linux",
+      "status": "active"
+    }
+  ]
+}

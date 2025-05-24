@@ -1,0 +1,146 @@
+[
+  {
+    "cve_id": "CVE-2023-10004",
+    "description": "OpenLDAP 2.4.44 injection flaw allows attacker to bypass login logic",
+    "affected_software": [
+      "OpenLDAP 2.4.44"
+    ],
+    "cvss_score": 7.8
+  },
+  {
+    "cve_id": "CVE-2023-10005",
+    "description": "Node.js axios <0.21.1 dependency injection in HTTP requests",
+    "affected_software": [
+      "axios 0.21.1"
+    ],
+    "cvss_score": 7.2
+  },
+  {
+    "cve_id": "CVE-2023-10013",
+    "description": "Cisco IOS XE 17.3.4a allows credential stuffing via rate limit bypass",
+    "affected_software": [
+      "Cisco IOS XE 17.3.4a"
+    ],
+    "cvss_score": 6.9
+  },
+  {
+    "cve_id": "CVE-2023-10012",
+    "description": "Microsoft Office 2016 macro execution flaw",
+    "affected_software": [
+      "Microsoft Office 2016"
+    ],
+    "cvss_score": 8.5
+  },
+  {
+    "cve_id": "CVE-2023-20003",
+    "description": "VLC Media Player <3.0.14 NULL pointer dereference",
+    "affected_software": [
+      "VLC Media Player"
+    ],
+    "cvss_score": 4.9
+  },
+  {
+    "cve_id": "CVE-2023-10003",
+    "description": "PostgreSQL 12.7 unauthorized data export using crafted SQL query",
+    "affected_software": [
+      "PostgreSQL 12.7"
+    ],
+    "cvss_score": 8.0
+  },
+  {
+    "cve_id": "CVE-2023-10010",
+    "description": "Jinja2 <2.12 template injection leads to RCE",
+    "affected_software": [
+      "Jinja2 2.11.3"
+    ],
+    "cvss_score": 7.8
+  },
+  {
+    "cve_id": "CVE-2023-20005",
+    "description": "Fitbit OS allows attacker to cause UI denial of service",
+    "affected_software": [
+      "Fitbit OS"
+    ],
+    "cvss_score": 3.5
+  },
+  {
+    "cve_id": "CVE-2023-10008",
+    "description": "PHP <7.4.3 RCE via unserialized payload",
+    "affected_software": [
+      "PHP 7.4.3"
+    ],
+    "cvss_score": 9.1
+  },
+  {
+    "cve_id": "CVE-2023-10002",
+    "description": "WordPress <6.0 File Upload Bypass leading to Web Shell deployment",
+    "affected_software": [
+      "WordPress <6.0"
+    ],
+    "cvss_score": 8.7
+  },
+  {
+    "cve_id": "CVE-2023-10006",
+    "description": "Django <3.2.10 fails to enforce auth checks on admin routes",
+    "affected_software": [
+      "Django 3.2.5"
+    ],
+    "cvss_score": 8.1
+  },
+  {
+    "cve_id": "CVE-2023-10011",
+    "description": "SQLAlchemy 1.4.20 allows second-order SQL injection in ORM filters",
+    "affected_software": [
+      "SQLAlchemy 1.4.20"
+    ],
+    "cvss_score": 8.6
+  },
+  {
+    "cve_id": "CVE-2023-20004",
+    "description": "SAP NetWeaver AS memory corruption bug",
+    "affected_software": [
+      "SAP NetWeaver"
+    ],
+    "cvss_score": 7.6
+  },
+  {
+    "cve_id": "CVE-2023-20002",
+    "description": "Android 12 camera component info leak via malformed JSON",
+    "affected_software": [
+      "Android 12 Camera Stack"
+    ],
+    "cvss_score": 5.0
+  },
+  {
+    "cve_id": "CVE-2023-10001",
+    "description": "Apache Struts RCE via crafted request (affects version 2.5.26)",
+    "affected_software": [
+      "Apache Struts 2.5.26"
+    ],
+    "cvss_score": 9.8
+  },
+  {
+    "cve_id": "CVE-2023-20001",
+    "description": "Intel Network Driver local privilege escalation (Windows Kernel mode)",
+    "affected_software": [
+      "Intel Drivers"
+    ],
+    "cvss_score": 5.4
+  },
+  {
+    "cve_id": "CVE-2023-10007",
+    "description": "FFmpeg 4.2.7 use-after-free in stream decoder",
+    "affected_software": [
+      "FFmpeg 4.2.7"
+    ],
+    "cvss_score": 9.0
+  },
+  {
+    "cve_id": "CVE-2023-10009",
+    "description": "libxml2 XXE via crafted payload",
+    "affected_software": [
+      "libxml2 2.9.10"
+    ],
+    "cvss_score": 7.5
+  }
+]
