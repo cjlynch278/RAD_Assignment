@@ -3,6 +3,10 @@
 import json
 
 from agent.base_agent import BaseAgent
+from agent.threat_analysis_agent import ThreatAnalysisAgent
+from agent.summary_agent import SummaryAgent
+
+from db.chroma_functions import *
 
 class OrchestratorAgent(BaseAgent):
     """
@@ -10,7 +14,7 @@ class OrchestratorAgent(BaseAgent):
     Inherits from BaseAgent to handle Gemini API calls.
     """
 
-    def __init__(self, gemini_api_key):
+    def __init__(self, gemini_api_key, collection_name="cves"):
         """
         Initialize the ThreatDetectionAgent with the API key and Gemini API URL.
         """
@@ -30,6 +34,16 @@ class OrchestratorAgent(BaseAgent):
             "3. lookup_assets(criteria): Lookup assets based on the provided criteria.\n"
         )
 
+        # I like having variables that the orchestrator agent can use when calling other agents
+        # These variables are also given in the user prompt and either have values or be none.
+        # This allows for a dynamic interaction where the results of one agent can be used by another.
+        #  without having to pass them explicitly. This can be useful for chaining agent calls.
+        
+        # This will be cve 
+        self.cve_data = None  # Placeholder for CVE data
+
+        self.threat_analysis_agent = ThreatAnalysisAgent(self.gemini_api_key)
+        self.summary_agent = SummaryAgent(self.gemini_api_key)
 
     def call_orhestrator_agent(self, incident_data):
         """
@@ -38,14 +52,19 @@ class OrchestratorAgent(BaseAgent):
         """
         functions = [
             {
-                "name": "perform_db_lookup",
-                "description": "Perform a database lookup for the given query.",
+                "name": "perform_vector_db_lookup",
+                "description": """
+                    Perform a vector db lookup to get relavent cve data. Look up relavent terms. 
+                    These terms can be used to find CVEs that are relevant to the incident.   
+                    These cve's are known threats. You should try to figure out if there are any relevant
+                    cves that are related to what the incident is      
+                    """,
                 "parameters": {
                     "type": "object",
                     "properties": {
                         "query": {
                             "type": "string",
-                            "description": "The query to perform a database lookup for."
+                            "description": "Keywords or phrases to search for in the vector database."
                         }
                     },
                     "required": ["query"]
@@ -66,18 +85,9 @@ class OrchestratorAgent(BaseAgent):
                 }
             },
             {
-                "name": "lookup_assets",
-                "description": "Lookup assets based on the provided criteria.",
-                "parameters": {
-                    "type": "object",
-                    "properties": {
-                        "criteria": {
-                            "type": "string",
-                            "description": "The criteria to lookup assets."
-                        }
-                    },
-                    "required": ["criteria"]
-                }
+                "name": "summarize",
+                "description": "Get a summary of the entire incident.",
+
             }
        
     ]
@@ -103,17 +113,48 @@ class OrchestratorAgent(BaseAgent):
             # Extract the function call from the response
             function_call = response.candidates[0].content.parts[0].function_call
 
-            if function_call and function_call.name == "write_vitals":
+            if function_call and function_call.name == "perform_vector_db_lookup":
                 # Extract arguments for the write_vitals function
-                vitals_data = function_call.args
+                keywords = function_call.args
+                # Returns all data on 
+                self.cve_data = query_collection(keywords, self.collection_name, n_results=3)
+                print(f"Vector DB Result: {vector_db_result}")
+
+            ####
+            #### Should this agent be called if there are not relavent cve's found?
+            #### Really the goal of this agent may simply be to prioritize given CVE's.
+            #### I'm going to make a decision to say that it must.
+            ####
+            if function_call and function_call.name == "analyze_threats" and self.cve_data:
+                # Extract arguments for the analyze threates function
+                threat_agent_resposne = self.threat_analysis_agent.call_threat_analysis_agent()
+               
 
                 # Execute the write_vitals function
                 response = self.write_vitals(vitals_data)
                 print(f"Vitals data written successfully: {vitals_data}")
+
                 return response
-            else:
-                print("No valid function call detected in the response.")
-                return None
+            
+            if function_call and function_call.name == "analyze_threats" and self.cve_data is None:
+                
+                return "No relevant CVE Data"
+            
+            if function_call and function_call.name == "summarize" and self.cve_data:
+                # Extract arguments for the analyze threates function
+                summary_agent_response = self.summary_agent.cal
+               
+
+                # Execute the write_vitals function
+                response = self.write_vitals(vitals_data)
+                print(f"Vitals data written successfully: {vitals_data}")
+
+                return response
+            
+            if function_call and function_call.name == "analyze_threats" and self.cve_data is None:
+                
+                return "No relevant CVE Data"
+
         except Exception as e:
             print(f"Error handling response: {e}")
             return None

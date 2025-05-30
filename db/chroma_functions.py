@@ -15,15 +15,18 @@ def chroma_setup(simulated_cves):
     Returns:
         chromadb.Collection: The populated ChromaDB collection.
     """
-
+    print("Setting up")
     # My preferred distance function is cosine, but you can choose others like "euclidean" or "dot"
     # Cosine distance ranges from -1 (opposite) to 1 (exact match).
+    print("Creating client")
     client = chromadb.Client()
     #client.delete_collection("cves")  # Ensure a clean start by deleting any existing collection with the same name
     
+    print("Embeedding function")
     embedding_function = embedding_functions.SentenceTransformerEmbeddingFunction(model_name="all-MiniLM-L6-v2")
     # Check if collection already exists
 
+    print("Creating Collection")
     cve_collection = client.create_collection(
         name="cves",
         embedding_function=embedding_function,
@@ -31,13 +34,20 @@ def chroma_setup(simulated_cves):
 
     )
 
+    print("Adding cve's")
     for cve in simulated_cves:
         # Each document must have a unique id and some content
+        print(f"Adding CVE {cve}")
         cve_collection.add(
             documents=[cve['description']],
             ids=[cve['cve_id']],
-           # metadatas=[{k: v for k, v in cve.items() if k not in ['id', 'description']}]
+            metadatas=[{
+                # Quick hack to turn given list into string.
+                "affected_software": ", ".join(cve.get("affected_software", [])),
+                "cvss_score": cve.get("cvss_score", None)
+            }]
         )
+
 
     return cve_collection
 
@@ -64,7 +74,7 @@ def initialize_database():
     return collection
 
 def get_all_cves():
-    return self.collection.get(
+    return collection.get(
         include=["documents", "metadatas", "embeddings"])
 
 def get_cve_by_id(cve_id):
@@ -80,7 +90,7 @@ def get_cve_by_name(cve_name):
     return results if results["ids"] else None
 
 
-
+# Leaving n_results parameter for potential debugging or future use
 def query_collection( query_text, collection, n_results=5):
     """Queries the ChromaDB collection with a given text.
     setting n_results to 5 returns the top 5 results which should be sufficient for most queries, and not overwhelm the llm
