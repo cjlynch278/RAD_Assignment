@@ -1,68 +1,72 @@
-# My Agent Project
+
+## Running
+Open the demo.ipynb file and run through each cell
+
+# RAD Assignment: Security Incident Analysis Agent
 
 ## Overview
-This project implements an intelligent agent designed to process incidents, perform threat analysis, and manage asset information. The agent utilizes various tools to interact with a simulated environment, leveraging vector embeddings for efficient data retrieval and analysis.
+This project implements a **Gen AI-powered agent** designed to assist in analyzing security incidents. The agent leverages a **Gemini's LLM** and integrates with tools like **ChromaDB** for contextual data retrieval. It simulates real-world security workflows, including CVE lookups, threat analysis, and incident summarization, to provide actionable insights for security analysts.
+
+---
+
+## Features
+- **Incident Analysis**: Processes incident data to identify and prioritize threats.
+- **CVE Lookup**: Retrieves relevant CVEs using a vector-based search in ChromaDB.
+- **Threat Intelligence**: Simulates threat analysis to assess the impact of incidents.
+- **Explainable Outputs**: Generates clear, traceable reasoning for its conclusions.
+- **Extensible Design**: Modular architecture allows integration with additional tools or data sources.
+
+---
 
 ## Project Structure
 ```
-my-agent-project
+RAD_Assignment
 ├── agent
-│   ├── main.py                # Entry point for the agent
-│   ├── functions.py           # Function tool definitions (e.g., DB lookup, threat intelligence)
-│   └── tools
-│       ├── cve_lookup.py      # Vector search against CVE DB
-│       ├── threat_analysis.py  # Ranks and interprets threat level
-│       └── asset_lookup.py     # Returns simulated asset info
+│   ├── orchestrator_agent.py       # Core agent for orchestrating tasks
+│   ├── threat_analysis_agent.py    # Handles threat analysis
+├── db
+│   ├── chroma_functions.py         # Functions for interacting with ChromaDB
 ├── data
-│   ├── incidents.json         # Sample incident(s) to process
-│   ├── cves.json              # CVE dataset (for vector DB ingestion)
-│   └── assets.json            # Simulated asset inventory
-├── embeddings
-│   ├── embedder.py            # Utility to embed CVEs and incidents
-│   └── vector_store.py        # Abstraction over the vector database (e.g., FAISS, Pinecone)
-├── prompts
-│   └── system_prompt.txt      # Instructions to guide agent behavior
-├── tests
-│   └── test_cve_lookup.py     # Tests for individual tools
-├── requirements.txt           # Python dependencies
-└── README.md                  # Project documentation
+├── demo.ipynb                      # Jupyter notebook for experimentation
+├── requirements.txt                # Python dependencies
+└── README.md                       # Project documentation
 ```
 
+---
+
 ## Setup Instructions
+
+### Prerequisites
+- Python 3.8 or higher (3.13 not recommended)
+- A valid API key for the LLM (if using a live LLM service)
+
+### Installation
 1. Clone the repository:
-   ```
+   ```bash
    git clone <repository-url>
-   cd my-agent-project
+   cd RAD_Assignment
    ```
 
-2. Install the required dependencies:
-   ```
+2. Install dependencies:
+   ```bash
    pip install -r requirements.txt
    ```
 
+3. Set up environment variables:
+   - Create a `.env` file in the project root and add your LLM API key:
+     ```
+     GEMINI_API_KEY=<your-api-key>
+     ```
+
+---
+
 ## Usage
-- To run the agent, execute the following command:
-  ```
-  python agent/main.py
-  ```
 
-- The agent will process the sample incidents defined in `data/incidents.json` and utilize the tools defined in the `agent/tools` directory for analysis.
+### Experimentation
+Use the Jupyter notebook for testing and experimentation:
+```bash
+jupyter notebook demo.ipynb
+```
 
-## Testing
-- To run the tests for the CVE lookup tool, use:
-  ```
-  python -m unittest tests/test_cve_lookup.py
-  ```
+---
 
-## Contributing
-Contributions are welcome! Please submit a pull request or open an issue for any enhancements or bug fixes.
-
-## License
-This project is licensed under the MIT License. See the LICENSE file for more details.
-
-
-## Future improvements
-Improve exceptions to not be catch alls
-Get rid of most of chroma functions
-temperature
-sentence transformer is fine tuned
