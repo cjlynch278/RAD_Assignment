@@ -20,6 +20,7 @@ def chroma_setup(simulated_cves):
     print("Creating client with persistence")
     client = chromadb.PersistentClient(path="./data/chroma_db") #hardcoded path for now, can be changed later
 
+    # Embedding function for converting text to embeddings
     embedding_function = embedding_functions.SentenceTransformerEmbeddingFunction(model_name="all-MiniLM-L6-v2")
 
     # Check if the collection already exists

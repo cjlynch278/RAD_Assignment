@@ -6,3 +6,5 @@ requests
 pytest
 dotenv
 chromadb
+google-genai
+sentence-transformers

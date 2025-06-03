@@ -64,3 +64,5 @@ This project is licensed under the MIT License. See the LICENSE file for more de
 ## Future improvements
 Improve exceptions to not be catch alls
 Get rid of most of chroma functions
+temperature
+sentence transformer is fine tuned

@@ -4,7 +4,6 @@ import json
 
 from agent.base_agent import BaseAgent
 from agent.threat_analysis_agent import ThreatAnalysisAgent
-from agent.summary_agent import SummaryAgent
 
 from db.chroma_functions import *
 
@@ -47,7 +46,6 @@ class OrchestratorAgent(BaseAgent):
         # This will be cve 
 
         self.threat_analysis_agent = ThreatAnalysisAgent(self.gemini_api_key)
-        self.summary_agent = SummaryAgent(self.gemini_api_key)
         self.cve_results = None  # Placeholder for the results of the CVE lookup
 
         self.chroma_client = chroma_client
