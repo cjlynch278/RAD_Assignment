@@ -82,10 +82,6 @@ class BaseAgent:
                     model=self.gemini_model,
                     contents=contents
                 )
-
-            print("Response received from Gemini API.")
-            # Print the response
-            print(response)
             
             return response
 

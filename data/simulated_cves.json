@@ -142,5 +142,264 @@
       "libxml2 2.9.10"
     ],
     "cvss_score": 7.5
+  },
+
+  {
+    "cve_id": "CVE-2023-10004",
+    "description": "OpenLDAP 2.4.44 injection flaw allows attacker to bypass login logic",
+    "affected_software": [
+      "OpenLDAP 2.4.44"
+    ],
+    "cvss_score": 7.8
+  },
+  {
+    "cve_id": "CVE-2023-13111",
+    "description": "Apache HTTP Server 2.4.54 mod_proxy buffer overflow leads to remote code execution",
+    "affected_software": [
+      "Apache HTTP Server 2.4.54"
+    ],
+    "cvss_score": 8.6
+  },
+  {
+    "cve_id": "CVE-2023-14567",
+    "description": "Grafana 8.3.1 path traversal allows unauthorized access to arbitrary files",
+    "affected_software": [
+      "Grafana 8.3.1"
+    ],
+    "cvss_score": 7.5
+  },
+  {
+    "cve_id": "CVE-2023-14991",
+    "description": "Grafana 8.3.1 exposure of dashboard metrics to unauthenticated users",
+    "affected_software": [
+      "Grafana 8.3.1"
+    ],
+    "cvss_score": 6.4
+  },
+  {
+    "cve_id": "CVE-2022-20433",
+    "description": "Fortinet FortiOS 7.0.4 improper input validation in SSL VPN may allow buffer overflow",
+    "affected_software": [
+      "Fortinet FortiOS 7.0.4"
+    ],
+    "cvss_score": 9.1
+  },
+  {
+    "cve_id": "CVE-2022-20490",
+    "description": "Fortinet FortiOS 7.0.4 SSL VPN interface session fixation vulnerability",
+    "affected_software": [
+      "Fortinet FortiOS 7.0.4"
+    ],
+    "cvss_score": 8.2
+  },
+  {
+    "cve_id": "CVE-2021-44228",
+    "description": "Apache Log4j 2.x JNDI injection flaw allows remote code execution (Log4Shell)",
+    "affected_software": [
+      "Log4j 2.0-beta9 through 2.14.1"
+    ],
+    "cvss_score": 10.0
+  },
+  {
+    "cve_id": "CVE-2023-18212",
+    "description": "VMware vCenter Server 7.0 privilege escalation via improper access control",
+    "affected_software": [
+      "VMware vCenter Server 7.0"
+    ],
+    "cvss_score": 7.2
+  },
+  {
+    "cve_id": "CVE-2023-19004",
+    "description": "VMware vCenter Server 7.0 information disclosure through debug logging",
+    "affected_software": [
+      "VMware vCenter Server 7.0"
+    ],
+    "cvss_score": 5.4
+  },
+  {
+    "cve_id": "CVE-2022-12055",
+    "description": "Wireshark 3.6.1 dissection bug leads to denial of service via crafted capture file",
+    "affected_software": [
+      "Wireshark 3.6.1"
+    ],
+    "cvss_score": 4.3
+  },
+  {
+    "cve_id": "CVE-2023-15331",
+    "description": "Docker Desktop 4.5.0 directory traversal in diagnostics upload feature",
+    "affected_software": [
+      "Docker Desktop 4.5.0"
+    ],
+    "cvss_score": 6.7
+  },
+  {
+    "cve_id": "CVE-2023-20449",
+    "description": "Kubernetes API Server 1.24.x RBAC misconfiguration allows privilege escalation",
+    "affected_software": [
+      "Kubernetes API Server 1.24.3"
+    ],
+    "cvss_score": 8.8
+  },
+  {
+    "cve_id": "CVE-2023-15555",
+    "description": "LibreOffice 7.3.1 crafted document macro bypass leads to code execution",
+    "affected_software": [
+      "LibreOffice 7.3.1"
+    ],
+    "cvss_score": 7.1
+  },
+  {
+    "cve_id": "CVE-2023-19999",
+    "description": "LibreOffice 7.3.1 improper input sanitization in Base reports module",
+    "affected_software": [
+      "LibreOffice 7.3.1"
+    ],
+    "cvss_score": 5.6
+  },
+  {
+    "cve_id": "CVE-2022-32532",
+    "description": "Unbound DNS 1.16.3 malformed request causes infinite recursion and crash",
+    "affected_software": [
+      "Unbound DNS 1.16.3"
+    ],
+    "cvss_score": 6.5
+  },
+  {
+    "cve_id": "CVE-2023-20721",
+    "description": "Microsoft Exchange Server 2019 SSRF vulnerability in AutoDiscover endpoint",
+    "affected_software": [
+      "Exchange Server 2019 CU12"
+    ],
+    "cvss_score": 9.0
+  },
+  {
+    "cve_id": "CVE-2023-10079",
+    "description": "Django 4.1 improper password reset link generation exposes tokens",
+    "affected_software": [
+      "Django 4.1"
+    ],
+    "cvss_score": 6.8
+  },
+  {
+    "cve_id": "CVE-2023-17229",
+    "description": "Jetty 10.0.12 header injection in response splitting vulnerability",
+    "affected_software": [
+      "Jetty 10.0.12"
+    ],
+    "cvss_score": 5.9
+  },
+  {
+    "cve_id": "CVE-2023-20000",
+    "description": "Redis 7.0.10 ACL bypass allows unauthorized command execution",
+    "affected_software": [
+      "Redis 7.0.10"
+    ],
+    "cvss_score": 8.1
+  },
+  {
+    "cve_id": "CVE-2023-18888",
+    "description": "HAProxy 2.5.3 improper request processing enables request smuggling attack",
+    "affected_software": [
+      "HAProxy 2.5.3"
+    ],
+    "cvss_score": 7.6
+  },
+  {
+    "cve_id": "CVE-2023-10080",
+    "description": "Grafana 8.3.1 XSS vulnerability in dashboard sharing feature",
+    "affected_software": [
+      "Grafana 8.3.1"
+    ],
+    "cvss_score": 6.0
+  },
+  {
+    "cve_id": "CVE-2023-10081",
+    "description": "Kubernetes kubelet insecure port exposure allows remote code execution",
+    "affected_software": [
+      "Kubernetes kubelet <1.24.0"
+    ],
+    "cvss_score": 9.2
+  },
+  {
+    "cve_id": "CVE-2023-10082",
+    "description": "Apache Kafka 2.8.0 insecure deserialization in consumer group management",
+    "affected_software": [
+      "Apache Kafka 2.8.0"
+    ],
+    "cvss_score": 7.4
+  },
+  {
+    "cve_id": "CVE-2023-10083",
+    "description": "MySQL 8.0.26 privilege escalation via crafted SQL query",
+    "affected_software": [
+      "MySQL 8.0.26"
+    ],
+    "cvss_score": 8.3
+  },
+  {
+    "cve_id": "CVE-2023-10084",
+    "description": "Nginx 1.21.0 denial of service via crafted HTTP request",
+    "affected_software": [
+      "Nginx 1.21.0"
+    ],
+    "cvss_score": 6.5
+  },
+  {
+    "cve_id": "CVE-2023-10085",
+    "description": "Postfix 3.5.6 remote code execution via crafted email headers",
+    "affected_software": [
+      "Postfix 3.5.6"
+    ],
+    "cvss_score": 7.9
+  }   ,
+  {
+    "cve_id": "CVE-2023-10086",
+    "description": "Redis 6.2.5 memory leak via crafted Lua script",
+    "affected_software": [
+      "Redis 6.2.5"
+    ],
+    "cvss_score": 5.7
+  },
+  {
+    "cve_id": "CVE-2023-10087",
+    "description": "Apache Tomcat 9.0.54 XSS in JSP error pages",
+    "affected_software": [
+      "Apache Tomcat 9.0.54"
+    ],
+    "cvss_score": 6.1
+  } ,
+  {
+    "cve_id": "CVE-2023-10088",
+    "description": "OpenSSL 1.1.1k denial of service via crafted TLS handshake",
+    "affected_software": [
+      "OpenSSL 1.1.1k"
+    ],
+    "cvss_score": 7.0
+  },
+  {
+    "cve_id": "CVE-2023-10089",
+    "description": "PHP 8.0.10 remote code execution via unserialize vulnerability",
+    "affected_software": [
+      "PHP 8.0.10"
+    ],
+    "cvss_score": 9.2
+  },
+  {
+    "cve_id": "CVE-2023-10090",
+    "description": "Python 3.9.6 remote code execution via pickle module",
+    "affected_software": [
+      "Python 3.9.6"
+    ],
+    "cvss_score": 8.4
+  },
+  {
+    "cve_id": "CVE-2023-10091",
+    "description": "Node.js 14.17.0 denial of service via crafted request",
+    "affected_software": [
+      "Node.js 14.17.0"
+    ],
+    "cvss_score": 7.5
   }
+
+  
 ]

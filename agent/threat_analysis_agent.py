@@ -27,7 +27,10 @@ class ThreatAnalysisAgent(BaseAgent):
             "They arent necessarily relavent"
             " Your job is to prioritize CVEs: Assess the risk and impact of relevant CVEs in the context of the specific incident, "
             "going beyond standard scores like CVSS"
-            "You will need to return a list back of the cve's in what you think are the most relevant organized from most relavent to least. "
+            "You will need to return a list back of the cve's in what you think are the most relevant organized from most relavent to least. 
+            "You can disregard CVE's that you think are not relavent to the incident, but you must return at least one CVE. Do not include irrelavent cves"
+            "Give a summary of the incident and the CVEs you found, and why you think they are relavent."
+            "Quick summary what you think the next steps should be for the incident response team. Only provide 2-3 bullet points."
         """
 
         # I like having variables that the orchestrator agent can use when calling other agents
@@ -49,11 +52,38 @@ class ThreatAnalysisAgent(BaseAgent):
                     Here are the relavent CVE's found  {relevant_cves}
                 """
 
-            response = self.call_gemini( system_prompt=self.system_prompt, user_prompt=user_prompt)
-            #handle_response = self.handle_response(response=response)
-            return response
+            
+            # try calling gemini 3 times. If the check_response fails, retry
+            for _ in range(3):
+                response = self.call_gemini(system_prompt=self.system_prompt, user_prompt=user_prompt)
+                response_text = self.check_response(response)
+                if response_text is not None:
+                    return response_text
+            print("Failed to get a valid response from threat analysis agent after 3 attempts.")
+            return None
         except Exception as e:
-            print(f"Error calling Vitals agent: {e}")
+            print(f"Error calling Threat Analysis Agent: {e}")
             return None
 
 
+    def check_response(self, response):
+        """
+        Check the response from the Gemini API call.
+        This method will be used to check the response from the Gemini API call.
+        Check if the response contains response.candidates[0].content.parts[0].text
+
+        """
+        if response and hasattr(response, 'candidates') and len(response.candidates) > 0:
+            content = response.candidates[0].content
+            if hasattr(content, 'parts') and len(content.parts) > 0:
+                text = content.parts[0].text
+                # If text doesn't exist, return None
+                if text:
+                    return text
+                else:
+                    print("No text found in the response.")
+                    return None
+                
+        else:
+            print("No valid response received from Gemini API.")
+            return None 

@@ -7,7 +7,7 @@ from chromadb.utils import embedding_functions
 
 def chroma_setup(simulated_cves):
     """
-    Initializes a ChromaDB collection and populates it with CVE data.
+    Initializes a persistent ChromaDB collection and populates it with CVE data.
 
     Args:
         simulated_cves (list of dict): List of CVE dictionaries, each with at least 'id' and 'description' keys.
@@ -16,38 +16,43 @@ def chroma_setup(simulated_cves):
         chromadb.Collection: The populated ChromaDB collection.
     """
     print("Setting up")
-    # My preferred distance function is cosine, but you can choose others like "euclidean" or "dot"
-    # Cosine distance ranges from -1 (opposite) to 1 (exact match).
-    print("Creating client")
-    client = chromadb.Client()
-    #client.delete_collection("cves")  # Ensure a clean start by deleting any existing collection with the same name
-    
-    print("Embeedding function")
+    # Initialize the persistent ChromaDB client
+    print("Creating client with persistence")
+    client = chromadb.PersistentClient(path="./data/chroma_db") #hardcoded path for now, can be changed later
+
     embedding_function = embedding_functions.SentenceTransformerEmbeddingFunction(model_name="all-MiniLM-L6-v2")
-    # Check if collection already exists
 
-    print("Creating Collection")
-    cve_collection = client.create_collection(
-        name="cves",
-        embedding_function=embedding_function,
-        metadata={"hnsw:space": "cosine"}  # This sets the distance metric to cosine
-
-    )
-
-    print("Adding cve's")
-    for cve in simulated_cves:
-        # Each document must have a unique id and some content
-        print(f"Adding CVE {cve}")
-        cve_collection.add(
-            documents=[cve['description']],
-            ids=[cve['cve_id']],
-            metadatas=[{
-                # Quick hack to turn given list into string.
-                "affected_software": ", ".join(cve.get("affected_software", [])),
-                "cvss_score": cve.get("cvss_score", None)
-            }]
+    # Check if the collection already exists
+    existing_collections = client.list_collections()
+    if "cves" in [col.name for col in existing_collections]:
+        # Retrieve the existing collection
+        print("Collection 'cves' already exists. Retrieving it.")
+        cve_collection = client.get_collection(
+            name="cves",
+            embedding_function=embedding_function,
+        )
+    else:
+        print("Collection 'cves' does not exist. Creating a new one.")
+        print("Creating Collection")
+        cve_collection = client.create_collection(
+            name="cves",
+            embedding_function=embedding_function,
+            metadata={"hnsw:space": "cosine"}  # To parameterize
         )
 
+        print("Adding CVEs")
+        for cve in simulated_cves:
+            # Each document must have a unique id and some content
+            print(f"Adding CVE {cve}")
+            cve_collection.add(
+                documents=[cve['description']],
+                ids=[cve['cve_id']],
+                metadatas=[{
+                    # Quick hack to turn given list into string.
+                    "affected_software": ", ".join(cve.get("affected_software", [])),
+                    "cvss_score": cve.get("cvss_score", None)
+                }]
+            )
 
     return cve_collection
 
@@ -64,6 +69,24 @@ def delete_collection(client, collection_name):
         print(f"Collection '{collection_name}' deleted successfully.")
     except Exception as e:
         print(f"Error deleting collection '{collection_name}': {e}")
+def get_collection(client, collection_name):
+    """
+    Retrieves a ChromaDB collection by name.
+
+    Args:
+        client (chromadb.Client): The ChromaDB client instance.
+        collection_name (str): The name of the collection to retrieve.
+
+    Returns:
+        chromadb.Collection: The retrieved collection.
+    """
+    try:
+        collection = client.get_collection(name=collection_name)
+        print(f"Collection '{collection_name}' retrieved successfully.")
+        return collection
+    except Exception as e:
+        print(f"Error retrieving collection '{collection_name}': {e}")
+        return None
 def create_collection(client):
     collection = client.create_collection("cve_data")
     return collection
@@ -98,7 +121,7 @@ def query_collection( query_text, collection, n_results=5):
     
     result = collection.query(
         query_texts=[query_text],
-        n_results=5,
-        include=["documents", "metadatas", "embeddings","distances"]
+        n_results=n_results,
+        include=["documents", "metadatas", "distances"]
     )
     return result if result["ids"] else None

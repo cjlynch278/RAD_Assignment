@@ -59,3 +59,8 @@ Contributions are welcome! Please submit a pull request or open an issue for any
 
 ## License
 This project is licensed under the MIT License. See the LICENSE file for more details.
+
+
+## Future improvements
+Improve exceptions to not be catch alls
+Get rid of most of chroma functions

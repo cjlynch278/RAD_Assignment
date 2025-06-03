@@ -4,3 +4,5 @@ scikit-learn
 faiss-cpu
 requests
 pytest
+dotenv
+chromadb
